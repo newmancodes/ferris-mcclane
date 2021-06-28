@@ -132,10 +132,10 @@ impl<'a> BucketPuzzle<'a> {
 
 impl Display for BucketPuzzle<'_> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
-        write!(f, "Target Volume: {}.\n", self.target_volume).unwrap();
-        write!(f, "Rules: {}\n", self.rules).unwrap();
+        writeln!(f, "Target Volume: {}.", self.target_volume).unwrap();
+        writeln!(f, "Rules: {}", self.rules).unwrap();
         match &self.reason {
-            Some(reason) => write!(f, "Performed: {}.\n", reason).unwrap(),
+            Some(reason) => writeln!(f, "Performed: {}.", reason).unwrap(),
             None => {},
         };
         write!(f, "Now: ").unwrap();
