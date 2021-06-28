@@ -39,8 +39,18 @@ impl<'a> BucketPuzzle<'a> {
         }
     }
 
+    pub fn is_goal_state(&'a self) -> bool {
+        for bucket in &self.buckets {
+            if bucket.used_capacity() == self.target_volume {
+                return true;
+            }
+        }
+
+        false
+    }
+
     pub fn expand(&'a self, limit: u8) -> Vec<BucketPuzzle<'a>> {
-        let mut expanded: Vec<BucketPuzzle> = Vec::new();
+        let mut expanded: Vec<BucketPuzzle<'a>> = Vec::new();
 
         if self.depth < limit {
             for bucket in &self.buckets {
