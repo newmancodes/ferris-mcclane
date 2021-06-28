@@ -17,12 +17,7 @@ fn main() {
 
     let rules = Rules::new(can_fill, can_empty);
     let puzzle = BucketPuzzle::from(&buckets, &rules, target_capacity);
-    match puzzle.expand(5) {
-        Some(child_states) => {
-            for child_state in child_states {
-                println!("{}", child_state);
-            }
-        },
-        _ => {},
+    for child_state in puzzle.expand(5) {
+        println!("{}", child_state);
     }
 }
