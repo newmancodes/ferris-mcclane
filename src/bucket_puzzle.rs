@@ -71,7 +71,7 @@ impl<'a> BucketPuzzle<'a> {
 
         for existing_bucket in &self.buckets {
             if bucket == existing_bucket {
-                buckets.push(existing_bucket.empty());
+                buckets.push(existing_bucket.pour_all());
             }
             else {
                 buckets.push(existing_bucket.clone());

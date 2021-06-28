@@ -23,11 +23,11 @@ impl Bucket {
         })
     }
 
-    pub fn as_empty(id: usize, capacity: u8) -> Result<Self, String> {
+    pub fn empty(id: usize, capacity: u8) -> Result<Self, String> {
         Bucket::new(id, capacity, 0)
     }
 
-    pub fn as_full(id: usize, capacity: u8) -> Result<Self, String> {
+    pub fn full(id: usize, capacity: u8) -> Result<Self, String> {
         Bucket::new(id, capacity, capacity)
     }
 
@@ -47,8 +47,8 @@ impl Bucket {
         self.remaining_capacity() == 0
     }
 
-    pub fn empty(&self) -> Self {
-        Bucket::as_empty(self.id, self.capacity).unwrap()
+    pub fn pour_all(&self) -> Self {
+        Bucket::empty(self.id, self.capacity).unwrap()
     }
 
     pub fn pour_from(&self, pour_amount: u8) -> Result<Self, String> {
@@ -56,7 +56,7 @@ impl Bucket {
     }
 
     pub fn fill(&self) -> Self {
-        Bucket::as_full(self.id, self.capacity).unwrap()
+        Bucket::full(self.id, self.capacity).unwrap()
     }
 
     pub fn pour_into(&self, pour_amount: u8) -> Result<Self, String> {
@@ -89,7 +89,7 @@ mod tests {
     #[test]
     fn empty_buckets_can_be_created() {
         let desired_capacity: u8 = 56;
-        let bucket = Bucket::as_empty(12,56).unwrap();
+        let bucket = Bucket::empty(12,56).unwrap();
         assert_eq!(bucket.is_empty(), true);
         assert_eq!(bucket.remaining_capacity(), desired_capacity);
         assert_eq!(bucket.is_full(), false);
@@ -97,13 +97,13 @@ mod tests {
 
     #[test]
     fn empty_buckets_can_not_have_a_zero_capacity() {
-        let bucket = Bucket::as_empty(87, 0);
+        let bucket = Bucket::empty(87, 0);
         assert!(bucket.is_err());
     }
 
     #[test]
     fn full_buckets_can_be_created() {
-        let bucket = Bucket::as_full(9, 56).unwrap();
+        let bucket = Bucket::full(9, 56).unwrap();
         assert_eq!(bucket.is_empty(), false);
         assert_eq!(bucket.remaining_capacity(), 0);
         assert_eq!(bucket.is_full(), true);
@@ -111,7 +111,7 @@ mod tests {
 
     #[test]
     fn full_buckets_can_not_have_a_zero_capacity() {
-        let bucket = Bucket::as_full(6, 0);
+        let bucket = Bucket::full(6, 0);
         assert!(bucket.is_err());
     }
 
