@@ -17,8 +17,8 @@ fn main() {
 
     let rules = Rules::new(can_fill, can_empty);
     let puzzle = BucketPuzzle::from(buckets, &rules, target_capacity);
-    println!("{}\n", puzzle);
+    println!("Initial State:\n{}\n", puzzle);
     for child_state in puzzle.expand(5) {
-        println!("{}\n", child_state);
+        println!("Child State:\n{}\n", child_state);
     }
 }
