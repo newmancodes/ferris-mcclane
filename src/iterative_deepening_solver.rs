@@ -17,6 +17,8 @@ impl<'a> IterativeDeepeningSolver<'a> {
         let mut explored: Vec<BucketPuzzle<'a>> = Vec::new();
         let mut frontier: Vec<BucketPuzzle<'a>> = vec!(self.initial_state);
 
+        return None;
+        /*
         loop {
             match frontier.pop() {
                 Some(to_explore) => {
@@ -34,5 +36,6 @@ impl<'a> IterativeDeepeningSolver<'a> {
                 None => return None,
             }
         }
+        */
     }
 }
